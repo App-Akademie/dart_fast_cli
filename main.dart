@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'login_user.dart';
+
 // Login, damit der Fortschritt online gespeichert wird.
 // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
 // Ein Exerciseboard, auf dem man sieht, wie viele und welche Aufgaben man gemacht hat.
@@ -12,6 +14,8 @@ void main() {
   print(
       "Hier wird dir Code gezeigt, von dem du sagen sollst, ob er richtig oder falsch ist.");
 
+  const String expectedUserName = "kai";
+  const String expecedUserPassword = "passwort";
   bool isUserLoggedIn = false;
 
   // Wie lange läuft das Programm?
@@ -31,35 +35,12 @@ void main() {
         isProgramRunning = false;
       // Benutzer soll sich mit Username und Passwort einloggen können.
       case "l" || "L":
-        // Benutzername und Passwort abfragen.
-        // Schauen, ob es mit gespeicherten Daten übereinstimmt.
-        // Wenn ja, dann ist Benutzer eingeloggt.
-        // Wenn nein, entsprechende Ausgabe machen.
-        String expectedUserName = "kai";
-        String expecedUserPassword = "passwort";
+        // Funktion braucht:
+        // Username + Passwort
+        // Funktion gibt zurück:
+        // Ob Benutzer erfolgreich eingeloggt.
+        isUserLoggedIn = loginUser(expectedUserName, expecedUserPassword);
 
-        String inputUserName = "";
-        String inputUserPassword = "";
-
-        // Benutzername und Passwort abfragen.
-        stdout.write("Bitte gib deinen Benutzername ein: ");
-        inputUserName = stdin.readLineSync()!;
-        stdout.write("Bitte gib dein Passwort ein: ");
-        inputUserPassword = stdin.readLineSync()!;
-
-        // Schauen, ob es mit gespeicherten Daten übereinstimmt.
-        bool isLoginDataCorrect = inputUserName == expectedUserName &&
-            inputUserPassword == expecedUserPassword;
-
-        if (isLoginDataCorrect) {
-          print("Du hast dich erfolgreich eingeloggt");
-          isUserLoggedIn = true;
-        } else {
-          print("Du hast leider deine Daten falsch eingegeben");
-          isUserLoggedIn = false;
-        }
-
-        print("");
       // Anzeigen von Code Snippets, bei denen gesagt werden soll, was rauskommt.
       case "s" || "S":
         // Überprüfen, ob der Benutzer eingeloggt ist.
